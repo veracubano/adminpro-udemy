@@ -9,15 +9,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
+// Temporal
+import { FormsModule } from '@angular/forms';
+//import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent/* ,
+    GraficoDonaComponent  */   
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
