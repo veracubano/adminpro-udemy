@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef }
 })
 export class IncrementadorComponent implements OnInit {
 
-  @ViewChild('txtProgress') txtProgress: ElementRef;
+  @ViewChild('txtProgress') txtProgress: ElementRef; // ViewChild recibe como argumento una referencia a un elemento html
 
   @Input('nombre') leyenda: string = ''; // dentro del incrementador (o sea en el hijo) la variable se llamará "nombre", y afuera se llamará "leyenda"
   @Input() progreso: number = 50;
@@ -29,31 +29,32 @@ export class IncrementadorComponent implements OnInit {
     // let elemHtml: any = document.getElementsByName('progreso')[0]; // como devuelve un arreglo aunque haya un solo elemento necesito ponerle el índice [0] para que me devuelva el único que hay
     // console.log(elemHtml.value);
     // console.log(this.txtProgress);
-    if (newValue >= 100) {
-      this.progreso = 100;
-    } else if (newValue <= 0) {
-      this.progreso = 0;
-    } else {
-      this.progreso = newValue;
+    if (newValue) {
+      if (newValue >= 100) {
+        this.progreso = 100;
+      } else if (newValue <= 0) {
+        this.progreso = 0;
+      } else {
+        this.progreso = newValue;
+      }
+      // elemHtml.value = this.progreso;
+      this.txtProgress.nativeElement.value = this.progreso;
+      this.cambioValor.emit( this.progreso );
+      this.txtProgress.nativeElement.focus();
     }
-    // elemHtml.value = this.progreso;
-    this.txtProgress.nativeElement.value = this.progreso;
-    this.cambioValor.emit( this.progreso );
-    this.txtProgress.nativeElement.focus();
   }
 
-  cambiarValor(valor: number) {
-    if ( this.progreso >= 100 && valor > 0 ) {
+  cambiarValor(nuevoValor: number) {
+    if ( this.progreso >= 100 && nuevoValor > 0 ) {
       this.progreso = 100;
       return;
     }
-    if ( this.progreso <= 0 && valor < 0 ) {
+    if ( this.progreso <= 0 && nuevoValor < 0 ) {
       this.progreso = 0;
       return;
     }
-    this.progreso = this.progreso + valor;
+    this.progreso = this.progreso + nuevoValor;
     this.cambioValor.emit( this.progreso ); // aquí se usa el evento "cambioValor" que es quien enviará un valor hasta el padre (o sea, hasta el ProgressComponent)
-    focus();
   }
 
 }
