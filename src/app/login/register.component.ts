@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  registrarUsuario() {
+  registrandoUsuario() {
     // console.log('La validez del formulario es: ', this.forma.valid);
     // console.log(this.forma.value);
     if (this.forma.invalid) {

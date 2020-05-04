@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  guardar(usuarioDelForm: Usuario) {
+  guardando(usuarioDelForm: Usuario) {
     // console.log(usuarioDelForm);
     // console.log('Google:' + this.usuario.google);
     this.usuario.nombre = usuarioDelForm.nombre;
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
                 .subscribe();
   }
 
-  seleccionImagen(archivo: File) {
+  seleccionandoImagen(archivo: File) {
     // console.log(archivo);
     if (!archivo) {
       this.imagenASubir = null;
@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
     };
   }
 
-  cambiarImagen() {
+  cambiandoImagen() {
     this._usuarioService.cambiarImagen(this.imagenASubir, this.usuario._id);
   }
 

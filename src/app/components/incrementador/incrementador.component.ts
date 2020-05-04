@@ -44,7 +44,7 @@ export class IncrementadorComponent implements OnInit {
     }
   }
 
-  cambiarValor(nuevoValor: number) {
+  cambiandoValor(nuevoValor: number) {
     if ( this.progreso >= 100 && nuevoValor > 0 ) {
       this.progreso = 100;
       return;

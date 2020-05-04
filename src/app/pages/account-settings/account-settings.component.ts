@@ -11,18 +11,18 @@ export class AccountSettingsComponent implements OnInit {
 
   constructor( public _ajustes: SettingsService  ) { }
 
-  ngOnInit(): void { // cuando la página sea cargada se dispara la función "colocarCheck()" que está en este propio archivo
-    this.colocarCheck();
+  ngOnInit(): void { // cuando la página sea cargada se dispara la función "colocandoCheck()" que está en este propio archivo
+    this.colocandoCheck();
   }
 
-  cambiarColor( tema: string, link: any ) {
+  cambiandoColor( tema: string, link: any ) {
     console.log(tema);
     console.log(link);
-    this.aplicarCheck(link);
+    this.aplicandoCheck(link);
     this._ajustes.aplicarTema(tema);
   }
 
-  aplicarCheck( link: any ) {
+  aplicandoCheck( link: any ) {
     let selectores: any = document.getElementsByClassName('selector'); // "selectores" es un arreglo donde tengo todos los elementos del archivo "account-settings.components.html" que tienen la clase "selector"
     for ( let ref of selectores) {
       ref.classList.remove('working');
@@ -30,7 +30,7 @@ export class AccountSettingsComponent implements OnInit {
     link.classList.add('working');
   }
 
-  colocarCheck() {
+  colocandoCheck() {
     let selectores: any = document.getElementsByClassName('selector');
     let tema = this._ajustes.ajustes.tema;
     for ( let ref of selectores) {

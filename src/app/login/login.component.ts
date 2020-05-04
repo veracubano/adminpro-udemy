@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ingresar(forma: NgForm) {
+  ingresando(forma: NgForm) {
     // (1) console.log('Ingresando ...');
     // (1) this.router.navigate(['/dashboard']);
     // (2) console.log(forma.valid);

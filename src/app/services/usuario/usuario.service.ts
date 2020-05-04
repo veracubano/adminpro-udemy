@@ -94,8 +94,10 @@ export class UsuarioService {
     // console.log(url);
     return this.http.put(url, usuario)
                   .map((resp: any) => {
-                    let usuarioDB: Usuario = resp.usuario;
+                    if (usuario._id === this.usuario._id) {
+                      let usuarioDB: Usuario = resp.usuario;
                     this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+                    }
                     Swal.fire({
                       title: 'Usuario actualizado',
                       text: usuario.nombre,
@@ -120,7 +122,23 @@ export class UsuarioService {
           .catch(resp => {
             console.log(resp);
           });
+  }
 
+  cargarUsuarios(desde: number = 0) {
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuarios (termino: string) {
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url)
+                  .map((resp: any) => resp.usuarios);
+  }
+
+  borrarUsuario(id: string) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+    return this.http.delete(url);
   }
 
 }

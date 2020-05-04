@@ -30,9 +30,6 @@ export class SubirArchivoService {
       xhr.open('PUT', url, true);
       xhr.send(formData);
     });
-
-
-
-
   }
+
 }

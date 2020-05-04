@@ -7,6 +7,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent} from './account-settings/account-settings.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const pagesRoutes: Routes = [
   {
@@ -19,6 +20,9 @@ const pagesRoutes: Routes = [
       { path: 'graficas1', component: Graficas1Component, data: {titulo: 'Gráficas'} },
       { path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Ajustes del Tema'} },
       { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'} },
+
+      // Mantenimientos
+      { path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de usuarios'} },
       { path: '', pathMatch: 'full' , redirectTo: '/dashboard' }
     ]
   }
