@@ -22,7 +22,7 @@ export class UsuarioService {
   }
 
   estaLogueado() {
-    return (this.token.length > 5) ? true : false; // recordar esto es un ciclo if, si se cumple la condición devuelve "true" y si no se cumple la condición devuelve "false"
+    return (this.token.length > 5) ? true : false; // debo recordar que en esta línea de código está un ciclo if, si se cumple la condición devuelve "true" y si no se cumple la condición devuelve "false"
   }
 
   cargarDelStorage() {
