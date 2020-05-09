@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 export class HeaderComponent implements OnInit {
   usuario: Usuario;
 
-  constructor(public _usuarioService: UsuarioService, public _modalUploadService: ModalUploadService) { }
+  constructor(public _usuarioService: UsuarioService,
+              public _modalUploadService: ModalUploadService,
+              public router: Router) { }
 
   ngOnInit(): void {
     this.usuario = this._usuarioService.usuario; // usuario que está logueado, se mostrará la información en el html de este usuario
@@ -23,6 +26,10 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  rutaBuscando(termino: string) {
+    this.router.navigate(['/busqueda', termino]); // aquí dentro del paréntesis hay corchetes porque el método "navigate" lo que recibe es un arreglo
   }
 
 }

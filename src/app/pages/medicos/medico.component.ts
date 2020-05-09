@@ -34,7 +34,7 @@ export class MedicoComponent implements OnInit {
 
   ngOnInit(): void {
     this._hospitalService.cargarHospitales()
-                .subscribe(hospitalesRecibidos => this.hospitales = hospitalesRecibidos);
+                .subscribe((hospitalesRecibidos: any) => this.hospitales = hospitalesRecibidos);
     this._modalUploadService.notificacion
                 .subscribe((resp: any) => {
                   // console.log(resp);
@@ -44,7 +44,7 @@ export class MedicoComponent implements OnInit {
 
   cargandoMedico(id: string) {
     this._medicoService.cargarMedico(id)
-                .subscribe(medicoCargado => {
+                .subscribe((medicoCargado: any) => {
                   // console.log(medicoCargado);
                   this.medico = medicoCargado;
                   this.medico.hospital = medicoCargado.hospital._id;
@@ -69,7 +69,7 @@ export class MedicoComponent implements OnInit {
   cambiandoHospital(id: string) {
     // console.log(event);
     this._hospitalService.obtenerHospital(id)
-                .subscribe(hospitalDeCambio => {
+                .subscribe((hospitalDeCambio: any) => {
                   // console.log(hospitalDeCambio);
                   this.hospital = hospitalDeCambio;
                 });

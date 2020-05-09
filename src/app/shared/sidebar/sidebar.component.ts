@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this._usuarioService.usuario; // usuario que está logueado, se mostrará la información en el html de este usuario
+    this._sidebar.cargarMenu();
     this._modalUploadService.notificacion.subscribe(resp => {
       // console.log(resp);
       if (resp.usuario) {
