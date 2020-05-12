@@ -10,6 +10,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 // PipesModule
 import { PipesModule } from '../pipes/pipes.module';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
   imports: [
@@ -21,13 +22,15 @@ import { PipesModule } from '../pipes/pipes.module';
     BreadcrumbsComponent,
     HeaderComponent,
     SidebarComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    ModalUploadComponent
   ],
   exports: [
     BreadcrumbsComponent,
     HeaderComponent,
     SidebarComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    ModalUploadComponent
   ]
 })
 export class SharedModule { }

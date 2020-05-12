@@ -5,7 +5,7 @@ import { URL_SERVICIOS } from '../../config/config';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Observable, throwError} from 'rxjs';
+import { throwError } from 'rxjs';
 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -20,13 +20,37 @@ export class UsuarioService {
   token: string;
   menu: any[] = [];
 
-  constructor(public http: HttpClient, public router: Router, public _subirArchivoService: SubirArchivoService) {
+  constructor(public http: HttpClient,
+              public router: Router,
+              public _subirArchivoService: SubirArchivoService) {
     // console.log('Servicio de usuario listo');
     this.cargarDelStorage();
   }
 
+  renovarToken() {
+    let url = URL_SERVICIOS + '/login/renuevaToken';
+    url += '?token=' + this.token;
+    return this.http.get(url)
+                  .map((resp: any) => {
+                    this.token = resp.token;
+                    localStorage.setItem('token', this.token);
+                    // console.log('Token renovado');
+                    return true; // esto devuelve un "true" a lo que sea que se subscriba a esta petición "get" del método"http"
+                  })
+                  .catch(err => {
+                    this.router.navigate(['/login']);
+                    Swal.fire({
+                      title: 'No se pudo renovar token',
+                      text: 'No fue posible renovar su token',
+                      icon: 'error'
+                    });
+                    return throwError(err.error.mensaje);
+                  });
+  }
+
   estaLogueado() {
-    return (this.token.length > 5) ? true : false; // debo recordar que en esta línea de código está un ciclo if, si se cumple la condición devuelve "true" y si no se cumple la condición devuelve "false"
+    // console.log(this.token);
+    return (this.token.length > 5) ? true : false; // debo recordar que en esta línea de código está un ciclo if (condicional ternaria), si se cumple la condición devuelve "true" y si no se cumple la condición devuelve "false"
   }
 
   cargarDelStorage() {
@@ -68,7 +92,7 @@ export class UsuarioService {
     return this.http.post(url, {token: token})
                   .map((resp: any) => {
                     this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu);
-                    console.log(resp);
+                    // console.log(resp);
                     return true;
                   });
   }
@@ -160,7 +184,7 @@ export class UsuarioService {
             this.guardarStorage(id, this.token, this.usuario, this.menu);
           })
           .catch(resp => {
-            console.log(resp);
+            // console.log(resp);
           });
   }
 
@@ -169,7 +193,7 @@ export class UsuarioService {
     return this.http.get(url);
   }
 
-  buscarUsuarios (termino: string) {
+  buscarUsuarios(termino: string) {
     let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
     return this.http.get(url)
                   .map((resp: any) => resp.usuarios);
